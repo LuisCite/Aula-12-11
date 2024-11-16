@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Pede nome do ficheiro ao utilizador
+read -p "Digite o nome ficheiro: " file
+
+# Verifica existência desse ficheiro
+if [ ! -f "$file" ]; then
+  echo "Erro: ficheiro não encontrado."
+  exit 1
+fi
+
+# Conta o nº linhas e de palavras deste ficheiro
+NoLinhas=$(wc -l < "$file")
+NoPalavras=$(wc -w < "$file")
+
+echo "Informações do ficheiro:"
+echo "------------------------"
+echo "Nome do ficheiro: $file"
+echo "Número de Linhas: $NoLinhas"
+echo "Número de Palavras: $NoPalavras"
+echo
+
+# Expõe as primeiras 5 linhas deste ficheiro
+echo "5 Primeiras Linhas do ficheiro:"
+head -n 5 "$file"
+echo
+
+# Filtra linhas com a palavra "erro" (case-insensitive)
+echo "Linhas com a Palavra 'erro' (independente de maiúsculas/minúsculas):"
+grep -i "erro" "$file"
+

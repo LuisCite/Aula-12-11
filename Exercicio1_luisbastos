@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# pasta de destino
+read -p "Digite a pasta destino: " dir
+
+echo "Introduzido pelo utilizador:"
+echo "$dir"
+
+echo "Caminho passado por parâmetro:"
+echo "$dir"
+
+# Verificar se pasta passada como parâmetro existe
+if [ -d "$dir" ]; then
+    echo "A pasta existe"
+    cd "$dir" || exit 1  # muda de pasta ou sai em caso de erro
+else
+    echo "A pasta não existe"
+    exit 1
+fi
+
+echo "Conteúdo da pasta:"
+ls -la
+
+# Cria pasta de backup no destino
+mkdir -p "$dir/backup"
+
+# Move todos os ficheiros .txt para o pasta de backup
+mv *.txt "$dir/backup/"
+
+echo "Ficheiros movidos para $dir/backup"
+
+
